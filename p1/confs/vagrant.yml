@@ -1,0 +1,7 @@
+Server:
+  Name: 'nostermeS'
+  IpAddress: '192.168.56.110'
+
+ServerWorker:
+  Name: 'nostermeSW'
+  IpAddress: '192.168.56.111'
