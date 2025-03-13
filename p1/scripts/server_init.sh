@@ -1,13 +1,10 @@
 #!/bin/bash
 
-sudo apt-get update && sudo apt-get -y upgrade
-sudo apt-get -y install curl
+# args = [ ServerIp ]
 
-ServerIp=$1
+export INSTALL_K3S_EXEC="server --write-kubeconfig-mode 644 --node-ip $1"
 
-curl -sfL https://get.k3s.io | sh -s - server --write-kubeconfig /home/vagrant/.kube/config --node-ip $ServerIp
-sudo chown vagrant:vagrant -R /home/vagrant/.kube
+wget -qO - https://get.k3s.io | sh
 
-TOKEN=$(sudo cat /var/lib/rancher/k3s/server/node-token)
-
-echo $TOKEN > /vagrant/token
+# token in synced folder can be used by workers to connect
+sudo cat /var/lib/rancher/k3s/server/node-token > /vagrant/token

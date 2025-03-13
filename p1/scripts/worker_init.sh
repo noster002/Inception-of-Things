@@ -1,11 +1,9 @@
 #!/bin/bash
 
-sudo apt-get update && sudo apt-get -y upgrade
-sudo apt-get -y install curl
+# args = [ ServerIp, ServerWorkerIp ]
 
-ServerIp=$1
-ServerWorkerIp=$2
+export INSTALL_K3S_EXEC="agent --server https://$1:6443 --token $(cat /vagrant/token) --node-ip $2"
 
-TOKEN=$(cat /vagrant/token)
+wget -qO - https://get.k3s.io | sh
 
-curl -sfL https://get.k3s.io | K3S_URL=https://$ServerIp:6443 sh -s - agent --token $TOKEN --node-ip $ServerWorkerIp
+rm /vagrant/token
