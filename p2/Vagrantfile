@@ -1,0 +1,21 @@
+require 'yaml'
+
+settings = YAML.load_file 'confs/vagrant.yml'
+Server = settings['Server']['Name']
+ServerIp = settings['Server']['IpAddress']
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "debian/bookworm64"
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = Server
+    vb.memory = 1024
+    vb.cpus = 1
+  end
+
+  config.vm.define Server
+  config.vm.hostname = Server
+  config.vm.network "private_network", ip: ServerIp
+  config.vm.provision "shell", path: "scripts/server.sh", args: [ServerIp]
+
+end
