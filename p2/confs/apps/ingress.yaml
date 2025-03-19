@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: apps
 spec:
+  ingressClassName: traefik
   rules:
   - host: app1.com
     http:
