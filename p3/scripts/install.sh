@@ -53,12 +53,19 @@ installK3d() {
 	wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 }
 
+installArgoCD() {
+	wget -q https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+	runAsRoot install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+	rm argocd-linux-amd64
+}
+
 # Execute
 
 installDeps
 installDocker
 installKubectl
 installK3d
+installArgoCD
 
 # re-login to apply docker group changes
 exec su -l $USER
