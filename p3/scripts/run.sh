@@ -15,3 +15,7 @@ argocd login --username admin --password $PASSWORD localhost:8080 --insecure
 argocd account update-password --current-password $PASSWORD --new-password bookworm
 
 kubectl apply -f confs/deployment.yaml -n argocd
+
+sleep 5
+
+kubectl port-forward service/wil-playground -n dev 8888:8888 > /dev/null 2>&1 &
