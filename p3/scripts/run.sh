@@ -2,6 +2,7 @@
 
 k3d cluster create nosterme
 
+kubectl create namespace dev
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
@@ -13,6 +14,10 @@ PASSWORD=$(kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath=
 argocd login --username admin --password $PASSWORD localhost:8080 --insecure
 argocd account update-password --current-password $PASSWORD --new-password bookworm
 
-kubectl create namespace dev
-
 kubectl apply -f confs/deployment.yaml -n argocd
+
+sleep 5
+
+kubectl wait --for condition=Ready pod --all -n dev --timeout 120s
+
+kubectl port-forward service/wil-playground -n dev 8888:8888 > /dev/null 2>&1 &
