@@ -18,4 +18,6 @@ kubectl apply -f confs/deployment.yaml -n argocd
 
 sleep 5
 
+kubectl wait --for condition=Ready pod --all -n dev --timeout 120s
+
 kubectl port-forward service/wil-playground -n dev 8888:8888 > /dev/null 2>&1 &
