@@ -4,7 +4,7 @@ metadata:
   name: nosterme
   namespace: argocd
 spec:
-  project: default
+  project: development
   source:
     repoURL: https://github.com/noster002/Inception-of-Things.git
     targetRevision: HEAD
