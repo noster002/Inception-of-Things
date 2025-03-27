@@ -9,3 +9,9 @@ spec:
   destinations:
   - namespace: dev
     server: https://kubernetes.default.svc
+  roles:
+  - name: control
+    groups:
+    - nosterme
+    policies:
+    - p, proj:development:control, applications, *, development/*, allow
