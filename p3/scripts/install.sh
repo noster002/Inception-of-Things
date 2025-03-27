@@ -67,5 +67,4 @@ installKubectl
 installK3d
 installArgoCD
 
-# re-login to apply docker group changes
-exec su -l $USER
+echo "Re-login to apply docker group to user"

@@ -1,6 +1,6 @@
 require 'yaml'
 
-settings = YAML.load_file 'confs/vagrant.yml'
+settings = YAML.load_file 'confs/vagrant.yaml'
 Server = settings['Server']['Name']
 ServerWorker = settings['ServerWorker']['Name']
 ServerIp = settings['Server']['IpAddress']
